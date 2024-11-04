@@ -1,0 +1,196 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Marck Script", cursive;
+    flex-direction: column;
+    background-color: #f0f0f0;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+.t {
+    color: white;
+    text-align:center;
+    font-size: 30px !important;
+    margin: 10px 0;
+    position: fixed; /* Фиксируем позицию наверху */
+    top: 10px; /* Отступ сверху */
+    left: 50%;
+    transform: translateX(-50%); /* Центрирование по горизонтали */
+    z-index: 1; /* Устанавливаем поверх других элементов */
+}
+
+.slider {
+    position: relative;
+    width: 60%; /* Задаем ширину слайдера */
+    max-width: 300px; /* Максимальная ширина */
+    height: 60%; /* Высота слайдера */
+    margin-top: 100px; /* Отступ сверху, чтобы не перекрывать заголовок */
+    display: flex;
+    justify-content: center; /* Центрируем контейнеры по горизонтали */
+}
+
+.container {
+    background-color: white;
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    height: 75%; /* Фиксированная высота для контейнера */
+    width: 70%; /* Занимает всю ширину слайдера */
+    transition: transform 0.5s ease; /* Плавная анимация */
+    display: none; /* Скрываем контейнеры по умолчанию */
+    position: absolute; /* Измените на абсолютное позиционирование */
+}
+
+.container.active {
+    display: block; /* Показываем активный контейнер */
+    z-index: 1; /* Слой поверх остальных */
+}
+
+.photo {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.caption {
+    font-size: 18px;
+    color: #333;
+    margin-top: 10px;
+}
+
+.arrow {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute; /* Позволяет стрелкам накладываться на контейнер */
+    z-index: 2; /* Установите выше, чтобы быть видимыми */
+}
+
+.arrow.left {
+    left: -40px; /* Регулируйте по своему усмотрению */
+    top: 43%; /* Центрирование по вертикали */
+    transform: translateY(-50%); /* Центрируем по вертикали */
+}
+
+.arrow.right {
+    right: -40px; /* Регулируйте по своему усмотрению */
+    top: 43%; /* Центрирование по вертикали */
+    transform: translateY(-50%); /* Центрируем по вертикали */
+}
+
+/* Стили для изображения стрелки */
+.arrow img {
+    width: 50px; /* Ширина стрелки */
+    height: auto; /* Высота сохраняется */
+    transition: transform 0.2s; /* Плавный эффект при наведении */
+}
+
+.arrow:hover img {
+    transform: scale(1.1); /* Увеличиваем стрелку при наведении */
+}
+
+/* Анимация для контейнеров */
+.container {
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Плавная анимация */
+}
+
+.slide-in-left {
+    transform: translateX(-100%);
+    opacity: 1;
+}
+
+.slide-in-right {
+    transform: translateX(100%);
+    opacity: 1;
+}
+
+.slide-out-left {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+.slide-out-right {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 600px) {
+    .t {
+        font-size: 20px;
+    }
+
+    .slider {
+        width: 90%;
+        max-width: 280px; /* Уменьшаем максимальную ширину для мобильных устройств */
+        margin-top: 80px; /* Уменьшаем отступ сверху */
+    }
+
+    .caption {
+        font-size: 16px;
+    }
+
+    .arrow {
+        padding: 5px; /* Уменьшаем паддинг для стрелок */
+    }
+
+    .left {
+        left: -20px; /* Уменьшаем отступ слева */
+    }
+
+    .right {
+        right: -20px; /* Уменьшаем отступ справа */
+    }
+}
+
+.arrow:disabled {
+    opacity: 0.5; /* Уменьшаем непрозрачность для неактивных кнопок */
+    cursor: not-allowed; /* Изменяем курсор */
+}
+
+.special-caption {
+    font-size: 24px; /* Размер шрифта */
+    color: #333; /* Цвет текста */
+    text-align: center; /* Центрирование текста */
+    margin: 50px 0; /* Отступы сверху и снизу */
+    line-height: 1.5; /* Межстрочный интервал */
+}
+
+/* Стили для кнопки */
+.button {
+    display: inline-block;
+    margin-top: 20px; /* Отступ сверху */
+    padding: 10px 20px; /* Паддинг кнопки */
+    background-color: #4CAF50; /* Цвет фона кнопки */
+    color: white; /* Цвет текста кнопки */
+    text-align: center; /* Центрирование текста */
+    text-decoration: none; /* Убираем подчеркивание */
+    border-radius: 5px; /* Скругленные углы */
+    transition: background-color 0.3s; /* Плавный переход при наведении */
+}
+
+.button:hover {
+    background-color: #45a049; /* Цвет кнопки при наведении */
+}
+
+
